@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marta Art Studio | Barcelona</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+        }
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6741 100%);
+            color: white;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 0.2rem;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .pillars-label {
+            text-align: center;
+            padding: 2rem 2rem 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .pillars-label h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        .pillars-label p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+        }
+        .card-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .card-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+        }
+        .card-label {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            color: white;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            z-index: 1;
+            opacity: 0.9;
+        }
+        .card-commercio {
+            background: linear-gradient(135deg, rgba(231,76,60,0.85) 0%, rgba(192,57,43,0.85) 100%),
+                        url('https://images.unsplash.com/photo-1596436889106-be35e843f974?w=600&h=400&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-artistico {
+            background: linear-gradient(135deg, rgba(52,152,219,0.8) 0%, rgba(142,68,173,0.8) 100%),
+                        url('portfolio/images/overview-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-professionale {
+            background: linear-gradient(135deg, rgba(26,26,46,0.9) 0%, rgba(22,33,62,0.9) 100%),
+                        url('https://images.unsplash.com/photo-1495121553079-4c61bcce1894?w=600&h=400&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-content {
+            padding: 1.5rem;
+        }
+        .card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .card .percentage {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.3rem 0.8rem;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        .tienda-link {
+            text-align: center;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .tienda-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 3rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .tienda-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(39,174,96,0.3);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1>MARTA VENTURES</h1>
+        <p>Arte Mexicano, Fotografía & Film Lab en Barcelona</p>
+    </header>
+
+    <div class="pillars-label">
+        <h2>Tres Pilares de Negocio</h2>
+        <p>Un modelo integrado que combina comercio, arte y servicios profesionales</p>
+    </div>
+
+    <main class="cards">
+        <a href="arte/" class="card">
+            <div class="card-image card-commercio">
+                <span class="card-label">Commercio • IAE 615.6</span>
+            </div>
+            <div class="card-content">
+                <h2>Arte Mexicano</h2>
+                <p>Artesanía tradicional de México: alebrijes de Oaxaca, cerámica Talavera, textiles artesanales y objetos de diseño contemporáneo.</p>
+                <span class="percentage">45% Y2 Target</span>
+            </div>
+        </a>
+
+        <a href="fotografia/" class="card">
+            <div class="card-image card-artistico">
+                <span class="card-label">Artistico • under IAE 615.6</span>
+            </div>
+            <div class="card-content">
+                <h2>Fotografía & Galería</h2>
+                <p>Obra fotográfica original de Marta Smaldone, representación de artistas emergentes latinoamericanos y servicios de eventos.</p>
+                <span class="percentage">30% Y2 Target</span>
+            </div>
+        </a>
+
+        <a href="lab/" class="card" style="opacity: 0.7;">
+            <div class="card-image card-professionale">
+                <span class="card-label">Professionale • IAE 973.1 • OPCIONAL</span>
+            </div>
+            <div class="card-content">
+                <h2>Mini-Lab Analógico</h2>
+                <p>Servicios profesionales de revelado B/N, C-41 y E-6, escaneo de alta resolución, edición y talleres de fotografía analógica.</p>
+                <span class="percentage" style="background: #f39c12; color: white;">Pendiente aprobación</span>
+            </div>
+        </a>
+    </main>
+
+    <div class="tienda-link">
+        <a href="tienda/" class="tienda-btn">Ver Tienda Online</a>
+        <a href="plan/" style="display: inline-block; margin-left: 1rem; color: #2c3e50; text-decoration: none; padding: 1rem 2rem; border: 2px solid #2c3e50; border-radius: 8px; font-weight: 500;">Business Plan</a>
+    </div>
+
+    <footer>
+        <p>Marta Ventures | Barcelona, España</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;"><a href="plan/" style="color: #888; text-decoration: none;">Business Plan</a></p>
+    </footer>
+</body>
+</html>

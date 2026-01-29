@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>il dottore della peste - Marta Smaldone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Karla', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            color: #000;
+            background: #fff;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+        img { max-width: 100%; height: auto; display: block; }
+        .site-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: #fff;
+            padding: 25px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo { font-size: 11px; font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
+        .main-nav { position: absolute; left: 50%; transform: translateX(-50%); }
+        .main-nav ul { list-style: none; display: flex; gap: 35px; }
+        .main-nav a { font-size: 11px; font-weight: 400; letter-spacing: 1.5px; text-transform: uppercase; opacity: 0.5; transition: opacity 0.2s; }
+        .main-nav a:hover, .main-nav a.active { opacity: 1; }
+        .has-dropdown { position: relative; }
+        .dropdown { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; padding: 20px 0; min-width: 240px; opacity: 0; visibility: hidden; transition: all 0.2s; text-align: center; margin-top: 10px; }
+        .has-dropdown:hover .dropdown { opacity: 1; visibility: visible; }
+        .dropdown a { display: block; padding: 10px 25px; font-size: 12px; text-transform: none; letter-spacing: 0.3px; opacity: 0.6; }
+        .dropdown a:hover { opacity: 1; }
+        .social-link { opacity: 0.5; transition: opacity 0.2s; }
+        .social-link:hover { opacity: 1; }
+        .social-link svg { width: 18px; height: 18px; }
+        main { padding-top: 90px; min-height: 100vh; }
+        .gallery { max-width: 900px; margin: 0 auto; padding: 50px 40px 60px; }
+        .gallery-item { margin-bottom: 40px; }
+        .gallery-item img { width: 100%; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-bottom: 40px; background: #000; }
+        .video-container video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
+        .site-footer { padding: 50px 40px; text-align: center; font-size: 10px; letter-spacing: 1.5px; color: #999; text-transform: uppercase; }
+        .work-nav { max-width: 760px; margin: 0 auto; padding: 0 40px 60px; display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        .work-nav a { opacity: 0.5; transition: opacity 0.2s; }
+        .work-nav a:hover { opacity: 1; }
+        @media (max-width: 768px) {
+            .site-header { padding: 20px 25px; flex-wrap: wrap; }
+            .main-nav { position: static; transform: none; order: 3; width: 100%; margin-top: 20px; }
+            .main-nav ul { justify-content: center; gap: 25px; }
+            .gallery { padding: 30px 25px 60px; }
+            main { padding-top: 120px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="../index.html" class="logo">Marta Smaldone</a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">Overview</a></li>
+                <li class="has-dropdown">
+                    <a href="../works.html" class="active">Works</a>
+                    <ul class="dropdown">
+                        <li><a href="working-on-it.html">working on it</a></li>
+                        <li><a href="the-circle-is-not-round.html">the circle is not round</a></li>
+                        <li><a href="il-dottore-della-peste.html">il dottore della peste</a></li>
+                        <li><a href="la-memoria-si-fa-carne.html">la memoria si fa carne</a></li>
+                        <li><a href="le-plat-pays.html">le plat pays qui est un peu le mien</a></li>
+                    </ul>
+                </li>
+                <li><a href="../info.html">Info</a></li>
+            </ul>
+        </nav>
+        <a href="https://www.instagram.com/marta.smaldone/" target="_blank" class="social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        </a>
+    </header>
+
+    <main>
+        <div class="gallery">
+            <div class="video-container">
+                <video controls poster="../images/works/il-dottore-della-peste/01.jpg">
+                    <source src="https://format.creatorcdn.com/v/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/1/eb85f3b2-0c1e-4866-abc3-2ac003edbc6a" type="video/mp4">
+                </video>
+            </div>
+            <div class="gallery-item">
+                <img src="../images/works/il-dottore-della-peste/01.jpg" alt="">
+            </div>
+        </div>
+
+        <nav class="work-nav">
+            <a href="the-circle-is-not-round.html">← Previous</a>
+            <a href="la-memoria-si-fa-carne.html">Next →</a>
+        </nav>
+    </main>
+
+    <footer class="site-footer">
+        <p>MartaSmaldone © 2025</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Plan | Marta Ventures</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+        }
+        nav {
+            background: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a { color: white; text-decoration: none; opacity: 0.8; }
+        nav a:hover { opacity: 1; }
+        .nav-links { display: flex; gap: 2rem; }
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+        .hero p { font-size: 1.1rem; opacity: 0.9; }
+        .version-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        .summary {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .summary h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-size: 1.8rem;
+        }
+        .summary p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .pillar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .pillar h3 { color: #2c3e50; margin-bottom: 0.5rem; }
+        .pillar .target { font-size: 2rem; font-weight: bold; color: #27ae60; }
+        .pillar p { color: #666; font-size: 0.9rem; }
+        .documents {
+            background: white;
+            padding: 3rem 2rem;
+        }
+        .documents-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .documents h2 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-size: 1.8rem;
+        }
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .doc {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #27ae60;
+            transition: transform 0.3s;
+        }
+        .doc:hover { transform: translateX(5px); }
+        .doc h3 { color: #2c3e50; margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .doc p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
+        .doc a {
+            display: inline-block;
+            background: #2c3e50;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        .doc a:hover { background: #34495e; }
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .timeline h2 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-size: 1.8rem;
+        }
+        .timeline-items {
+            border-left: 3px solid #27ae60;
+            padding-left: 2rem;
+        }
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.3rem;
+            width: 12px;
+            height: 12px;
+            background: #27ae60;
+            border-radius: 50%;
+        }
+        .timeline-item h4 { color: #2c3e50; margin-bottom: 0.3rem; }
+        .timeline-item .date { color: #27ae60; font-size: 0.85rem; font-weight: bold; }
+        .timeline-item p { color: #666; font-size: 0.95rem; }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #2c3e50;
+            color: rgba(255,255,255,0.7);
+        }
+        @media (max-width: 768px) {
+            .pillars { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../">← Marta Ventures</a>
+        <div class="nav-links">
+            <a href="../arte/">Arte</a>
+            <a href="../fotografia/">Foto & Galería</a>
+            <a href="../lab/">Lab</a>
+            <a href="../tienda/">Tienda</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>BUSINESS PLAN</h1>
+        <p>Marta Ventures — Arte Mexicano, Fotografía & Film Lab</p>
+        <span class="version-badge">v4.1 | Diciembre 2025</span>
+    </header>
+
+    <section class="summary">
+        <h2>Resumen Ejecutivo</h2>
+        <p>Marta Ventures es un negocio integrado de arte y fotografía en Barcelona, España. El modelo combina tres flujos de ingresos sinérgicos bajo una estrategia de lanzamiento por fases diseñada para minimizar riesgos mientras se valida la demanda del mercado.</p>
+
+        <div class="pillars">
+            <div class="pillar">
+                <h3>COMMERCIO</h3>
+                <div class="target">45%</div>
+                <p>Arte mexicano, importación, retail</p>
+                <p style="color: #888; font-size: 0.8rem;">IAE 615.6</p>
+            </div>
+            <div class="pillar">
+                <h3>ARTISTICO</h3>
+                <div class="target">30%</div>
+                <p>Fotografía, galería, exposiciones</p>
+                <p style="color: #888; font-size: 0.8rem;">under IAE 615.6</p>
+            </div>
+            <div class="pillar" style="opacity: 0.7; border: 2px dashed #f39c12;">
+                <h3>PROFESSIONALE</h3>
+                <div class="target" style="color: #f39c12;">25%</div>
+                <p>Film lab, talleres, servicios</p>
+                <p style="color: #f39c12; font-size: 0.8rem; font-weight: bold;">OPCIONAL - Requiere aprobación</p>
+                <p style="color: #888; font-size: 0.8rem;">IAE 973.1</p>
+            </div>
+        </div>
+
+        <p><strong>Capital Inicial:</strong> €10,000 | <strong>ROI Y2:</strong> 225% | <strong>Break-even:</strong> €615/mes</p>
+    </section>
+
+    <section class="documents">
+        <div class="documents-inner">
+            <h2>Documentos del Plan v4.1</h2>
+            <div class="doc-grid">
+                <div class="doc">
+                    <h3>First 90 Days</h3>
+                    <p>Plan detallado de los primeros 90 días de operación con hitos y acciones clave.</p>
+                    <a href="Marta_Ventures_First_90_Days_v4.1_2025-12-21.pdf" target="_blank">Ver PDF</a>
+                </div>
+                <div class="doc">
+                    <h3>Operations</h3>
+                    <p>Modelo financiero completo con proyecciones, costos y escenarios.</p>
+                    <a href="Marta_Ventures_Operations_v4.1_2025-12-21.xlsx" target="_blank">Ver Excel</a>
+                </div>
+                <div class="doc">
+                    <h3>Plan A: Commercio</h3>
+                    <p>Estrategia detallada para el pilar de comercio de arte mexicano.</p>
+                    <a href="Plan_A_Commercio_v4.1_2025-12-21.pdf" target="_blank">Ver PDF</a>
+                </div>
+                <div class="doc">
+                    <h3>Control Gates</h3>
+                    <p>Puntos de decisión Go/No-Go y criterios de evaluación.</p>
+                    <a href="Marta_Ventures_Control_Gates_v4.1_2025-12-21.pdf" target="_blank">Ver PDF</a>
+                </div>
+                <div class="doc" style="border-left-color: #3498db;">
+                    <h3>Research: Espacios Compartidos</h3>
+                    <p>Investigación de espacios pop-up, coworking artístico y galerías híbridas en Barcelona para Fase 4.</p>
+                    <a href="Research_Shared_Spaces_Barcelona_2025.md" target="_blank" style="background: #3498db;">Ver Markdown</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline">
+        <h2>Fases de Lanzamiento</h2>
+        <div class="timeline-items">
+            <div class="timeline-item">
+                <span class="date">Dic 2025 - Ene 2026</span>
+                <h4>Fase 0: Pre-Launch</h4>
+                <p>Preparación inicial y registro de autónomo</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">Feb - Abr 2026</span>
+                <h4>Fase 1: Foundation</h4>
+                <p>Viaje a México, ARCO Madrid, primeras ventas en mercadillos</p>
+            </div>
+            <div class="timeline-item" style="opacity: 0.7;">
+                <span class="date" style="color: #f39c12;">May - Ago 2026 (CONDICIONAL)</span>
+                <h4>Fase 2: Validation</h4>
+                <p>SI se aprueba: Lanzamiento del film lab, talleres, proceso C-41</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">Sep 2026</span>
+                <h4>Fase 3: Decision</h4>
+                <p>Evaluación Go/No-Go para espacio compartido</p>
+            </div>
+            <div class="timeline-item">
+                <span class="date">Oct 2026+</span>
+                <h4>Fase 4: Scale-Up</h4>
+                <p>Espacio compartido, planificación Y2</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Marta Ventures | Business Plan v4.1 | Barcelona, España</p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem;">Próxima revisión: 31 Marzo 2026</p>
+    </footer>
+</body>
+</html>

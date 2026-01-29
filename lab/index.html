@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-Lab Analógico | Marta Art Studio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            min-height: 100vh;
+        }
+        nav {
+            background: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a { color: white; text-decoration: none; opacity: 0.8; }
+        nav a:hover { opacity: 1; }
+        .nav-links { display: flex; gap: 2rem; }
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1495121553079-4c61bcce1894?w=1200&q=80') center/cover;
+            opacity: 0.15;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
+        .intro {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .intro h2 {
+            color: #e94560;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .intro p {
+            line-height: 1.8;
+            color: rgba(255,255,255,0.8);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .services {
+            background: #111;
+            padding: 4rem 2rem;
+        }
+        .services-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .services h2 {
+            text-align: center;
+            color: #e94560;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .service {
+            background: #1a1a2e;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(233,69,96,0.2);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .service:hover {
+            transform: translateY(-5px);
+            border-color: #e94560;
+        }
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .service h3 { color: #e94560; font-size: 1.3rem; }
+        .service .price {
+            background: #e94560;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .service p { color: rgba(255,255,255,0.7); line-height: 1.6; }
+        .service ul {
+            margin-top: 1rem;
+            padding-left: 1.2rem;
+            color: rgba(255,255,255,0.6);
+        }
+        .service li { margin-bottom: 0.3rem; }
+        .process {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .process h2 {
+            text-align: center;
+            color: #e94560;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        .step {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #e94560;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        .step h4 { color: white; margin-bottom: 0.5rem; }
+        .step p { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+        .pricing {
+            background: #1a1a2e;
+            padding: 4rem 2rem;
+        }
+        .pricing-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .pricing h2 {
+            text-align: center;
+            color: #e94560;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .pricing-table th, .pricing-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .pricing-table th {
+            color: #e94560;
+            font-weight: 500;
+        }
+        .pricing-table td { color: rgba(255,255,255,0.8); }
+        .pricing-table tr:hover { background: rgba(233,69,96,0.1); }
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #e94560 0%, #c23a51 100%);
+        }
+        .cta h2 { font-weight: 300; margin-bottom: 1rem; }
+        .cta p { opacity: 0.9; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #e94560;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+        .cta-btn:hover { transform: scale(1.05); }
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0a0a0a;
+            color: rgba(255,255,255,0.6);
+        }
+        @media (max-width: 768px) {
+            .process-steps { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../">← Marta Art Studio</a>
+        <div class="nav-links">
+            <a href="../arte/">Arte</a>
+            <a href="../fotografia/">Fotografía</a>
+            <a href="../tienda/">Tienda</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>MINI-LAB ANALÓGICO</h1>
+            <p>Revelado profesional de película en Barcelona</p>
+        </div>
+    </header>
+
+    <section class="intro">
+        <h2>Fotografía Analógica, Calidad Artesanal</h2>
+        <p>Ofrecemos servicios profesionales de revelado, escaneo y edición para fotógrafos analógicos. Cada rollo es tratado con el cuidado y atención que merece, combinando técnicas tradicionales con tecnología de digitalización de alta calidad.</p>
+    </section>
+
+    <section class="services">
+        <div class="services-inner">
+            <h2>Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service">
+                    <div class="service-header">
+                        <h3>B&W Revelado + Escaneo</h3>
+                        <span class="price">€15/rollo</span>
+                    </div>
+                    <p>Servicio completo de revelado B/N con escaneo incluido. El pack estándar para fotógrafos analógicos.</p>
+                    <ul>
+                        <li>35mm y formato medio (120)</li>
+                        <li>Escaneo estándar incluido</li>
+                        <li>Push/Pull disponible (+€3)</li>
+                        <li>Entrega en 48-72h</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <div class="service-header">
+                        <h3>C-41 Revelado + Escaneo</h3>
+                        <span class="price">€18/rollo</span>
+                    </div>
+                    <p>Proceso C-41 completo para película color negativo con escaneo incluido.</p>
+                    <ul>
+                        <li>35mm y formato medio (120)</li>
+                        <li>Químicos Kodak Flexicolor</li>
+                        <li>Escaneo estándar incluido</li>
+                        <li>Entrega en 48-72h</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <div class="service-header">
+                        <h3>E-6 Revelado + Escaneo</h3>
+                        <span class="price">€22/rollo</span>
+                    </div>
+                    <p>Revelado de película diapositiva con proceso E-6 y escaneo incluido.</p>
+                    <ul>
+                        <li>35mm y formato medio</li>
+                        <li>Escaneo estándar incluido</li>
+                        <li>Montaje opcional (+€5)</li>
+                        <li>Entrega en 5-7 días</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <div class="service-header">
+                        <h3>Escaneo Premium</h3>
+                        <span class="price">+€5/rollo</span>
+                    </div>
+                    <p>Upgrade de escaneo a alta resolución para cualquier servicio de revelado.</p>
+                    <ul>
+                        <li>Resolución hasta 6K</li>
+                        <li>Formato TIFF 16-bit</li>
+                        <li>Corrección de color avanzada</li>
+                        <li>Eliminación de polvo con ICE</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <div class="service-header">
+                        <h3>Talleres de Fotografía</h3>
+                        <span class="price">€45-80/persona</span>
+                    </div>
+                    <p>Workshops de fotografía analógica para todos los niveles.</p>
+                    <ul>
+                        <li>Introducción a la película (€45)</li>
+                        <li>Revelado en casa (€60)</li>
+                        <li>Masterclass completa (€80)</li>
+                        <li>Materiales incluidos</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <div class="service-header">
+                        <h3>Servicio Express</h3>
+                        <span class="price">+50%</span>
+                    </div>
+                    <p>Entrega prioritaria en 24 horas para cualquier servicio.</p>
+                    <ul>
+                        <li>Revelado urgente</li>
+                        <li>Escaneo prioritario</li>
+                        <li>Notificación inmediata</li>
+                        <li>Recogida flexible</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <h2>Cómo Funciona</h2>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h4>Entrega</h4>
+                <p>Trae tus rollos al estudio o envíalos por correo</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h4>Revelado</h4>
+                <p>Procesamos tu película con cuidado artesanal</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h4>Escaneo</h4>
+                <p>Digitalizamos cada fotograma en alta resolución</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h4>Entrega</h4>
+                <p>Recibe tus archivos y negativos originales</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <div class="pricing-inner">
+            <h2>Tarifas Completas</h2>
+            <table class="pricing-table">
+                <tr>
+                    <th>Servicio</th>
+                    <th>35mm</th>
+                    <th>120</th>
+                </tr>
+                <tr>
+                    <td>B&W Revelado + Escaneo</td>
+                    <td>€15</td>
+                    <td>€18</td>
+                </tr>
+                <tr>
+                    <td>C-41 Revelado + Escaneo</td>
+                    <td>€18</td>
+                    <td>€21</td>
+                </tr>
+                <tr>
+                    <td>E-6 Revelado + Escaneo</td>
+                    <td>€22</td>
+                    <td>€25</td>
+                </tr>
+                <tr>
+                    <td>Escaneo Premium (upgrade)</td>
+                    <td>+€5</td>
+                    <td>+€7</td>
+                </tr>
+                <tr>
+                    <td>Talleres</td>
+                    <td colspan="2">€45-80/persona</td>
+                </tr>
+                <tr>
+                    <td>Servicio Express</td>
+                    <td colspan="2">+50% (entrega 24h)</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Tienes rollos esperando?</h2>
+        <p>Tráelos al estudio o contáctanos para envío por correo. También ofrecemos talleres de revelado si quieres aprender a hacerlo tú mismo.</p>
+        <div class="cta-buttons">
+            <a href="mailto:lab@martaartstudio.com" class="cta-btn">Contactar</a>
+            <a href="../tienda/" class="cta-btn secondary">Ver Servicios en Tienda</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Marta Art Studio | Mini-Lab Analógico | Barcelona</p>
+        <p style="margin-top: 0.5rem;">Servicios profesionales para fotógrafos analógicos</p>
+    </footer>
+</body>
+</html>

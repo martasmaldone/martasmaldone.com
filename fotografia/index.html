@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotografía & Galería | Marta Art Studio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+        }
+        nav {
+            background: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a { color: white; text-decoration: none; opacity: 0.8; }
+        nav a:hover { opacity: 1; }
+        .nav-links { display: flex; gap: 2rem; }
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #3498db 0%, #8e44ad 100%);
+            color: white;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://format.creatorcdn.com/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/0/0/0,0,2602,3000,1200,1200/0-0-0/ac1d9b63-23da-4998-9f1e-400f5d76760a/1/1/Marta_Smaldone-03.jpg') center/cover;
+            opacity: 0.25;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
+        .about {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .about h2 {
+            color: #2980b9;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .about p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+            align-items: center;
+        }
+        .about-image {
+            height: 350px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .portfolio {
+            background: #1a1a1a;
+            padding: 4rem 2rem;
+        }
+        .portfolio-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .portfolio h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .portfolio-subtitle {
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 3rem;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .portfolio-item {
+            aspect-ratio: 1;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            cursor: pointer;
+        }
+        .portfolio-item:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+        .portfolio-item.tall { grid-row: span 2; aspect-ratio: auto; }
+        .services {
+            background: white;
+            padding: 4rem 2rem;
+        }
+        .services-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .services h2 {
+            text-align: center;
+            color: #2980b9;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .service {
+            background: #f9f9f9;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .service:hover { transform: translateY(-5px); }
+        .service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .service h3 { color: #2980b9; margin-bottom: 0.5rem; }
+        .service p { color: #666; line-height: 1.6; }
+        .service .price {
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        /* Gallery Section */
+        .gallery-section {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            padding: 4rem 2rem;
+            color: white;
+        }
+        .gallery-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .gallery-section h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .gallery-section p {
+            text-align: center;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+        .artists {
+            background: white;
+            padding: 4rem 2rem;
+        }
+        .artists-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .artists h2 {
+            text-align: center;
+            color: #8e44ad;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .artists-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .artists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .artist {
+            background: #f9f9f9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .artist-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .artist-content { padding: 1.5rem; }
+        .artist h3 { color: #8e44ad; margin-bottom: 0.3rem; }
+        .artist .country { color: #999; font-size: 0.9rem; margin-bottom: 0.8rem; }
+        .artist p { color: #666; line-height: 1.6; font-size: 0.95rem; }
+        .exhibitions {
+            background: #1a1a1a;
+            padding: 4rem 2rem;
+            color: white;
+        }
+        .exhibitions-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .exhibitions h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .exhibition {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .exhibition:last-child { border-bottom: none; }
+        .exhibition-date { text-align: right; }
+        .exhibition-date .month {
+            font-size: 0.9rem;
+            color: #9b59b6;
+            text-transform: uppercase;
+        }
+        .exhibition-date .year {
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .exhibition-info h3 { margin-bottom: 0.5rem; font-weight: 500; }
+        .exhibition-info p { color: rgba(255,255,255,0.7); line-height: 1.6; }
+        .collector-services {
+            background: #f5f5f5;
+            padding: 4rem 2rem;
+        }
+        .collector-services-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .collector-services h2 {
+            text-align: center;
+            color: #8e44ad;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .collector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .collector-service {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .collector-service-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .collector-service h3 { color: #8e44ad; margin-bottom: 0.5rem; }
+        .collector-service p { color: #666; line-height: 1.6; }
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+        .cta h2 { font-weight: 300; margin-bottom: 1rem; }
+        .cta p { opacity: 0.8; margin-bottom: 2rem; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .cta-btn {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover { background: #2980b9; }
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+        .cta-btn.secondary:hover { background: rgba(255,255,255,0.1); }
+        .cta-btn.gallery {
+            background: #8e44ad;
+        }
+        .cta-btn.gallery:hover { background: #9b59b6; }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #1a252f;
+            color: rgba(255,255,255,0.6);
+        }
+        footer a { color: rgba(255,255,255,0.8); }
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .exhibition { grid-template-columns: 1fr; gap: 1rem; }
+            .exhibition-date { text-align: left; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../">← Marta Art Studio</a>
+        <div class="nav-links">
+            <a href="../arte/">Arte</a>
+            <a href="../lab/">Lab</a>
+            <a href="../tienda/">Tienda</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>FOTOGRAFÍA & GALERÍA</h1>
+            <p>Obra original de Marta Smaldone y artistas emergentes latinoamericanos</p>
+        </div>
+    </header>
+
+    <!-- MARTA'S PHOTOGRAPHY -->
+    <section class="about">
+        <h2>Sobre la Artista</h2>
+        <p>Marta Smaldone es una fotógrafa italiana-mexicana radicada en Barcelona, cuyo trabajo explora la intersección entre memoria, identidad y territorio. Su práctica artística combina la fotografía analógica con técnicas digitales, creando imágenes que oscilan entre lo documental y lo poético.</p>
+
+        <div class="about-grid">
+            <div class="about-image" style="background-image: url('https://format.creatorcdn.com/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/0/0/0,0,2487,3000,600,600/0-0-0/d2aba00d-dffa-41c7-9861-64c38ef9046a/1/1/000065130007_3.jpg');"></div>
+            <div>
+                <h2>Trayectoria</h2>
+                <p>Con formación en artes visuales y más de una década de experiencia, Marta ha desarrollado series fotográficas que han sido exhibidas en galerías de México, Italia y España.</p>
+                <p>Su trabajo ha sido reconocido por su capacidad de capturar la esencia emocional de sus sujetos, ya sean paisajes mediterráneos, retratos íntimos o escenas de la vida cotidiana impregnadas de una luz particular.</p>
+            </div>
+        </div>
+
+        <div class="about-grid">
+            <div>
+                <h2>Series Principales</h2>
+                <p><strong>"The Circle is Not Round"</strong> — Una exploración de formas orgánicas y geometría natural, desafiando las percepciones convencionales del espacio.</p>
+                <p><strong>"Il Dottore della Peste"</strong> — Serie conceptual que reflexiona sobre el aislamiento, la máscara y la identidad en tiempos de crisis.</p>
+                <p><strong>"La memoria si fa carne"</strong> — Trabajo autobiográfico sobre herencia, migración y las huellas que dejamos en los lugares que habitamos.</p>
+            </div>
+            <div class="about-image" style="background-image: url('https://format.creatorcdn.com/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/0/0/0,0,1920,1080,600,400/0-0-0/dbed02b7-9acb-418c-8105-5809cfce9b45/1/1/dottore+copy2.jpg');"></div>
+        </div>
+    </section>
+
+    <section class="portfolio">
+        <div class="portfolio-inner">
+            <h2>Obra Seleccionada</h2>
+            <p class="portfolio-subtitle">Fotografías disponibles como impresiones de edición limitada</p>
+            <div class="portfolio-grid">
+                <div class="portfolio-item tall" style="background-image: url('https://format.creatorcdn.com/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/0/0/0,0,2602,3000,400,500/0-0-0/ac1d9b63-23da-4998-9f1e-400f5d76760a/1/1/Marta_Smaldone-03.jpg');"></div>
+                <div class="portfolio-item" style="background-image: url('https://format.creatorcdn.com/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/0/0/0,0,2500,1895,400,300/0-0-0/46852233-e04a-40ff-bd7a-58d25fc6d11b/1/1/000007r2.jpg');"></div>
+                <div class="portfolio-item" style="background-image: url('https://format.creatorcdn.com/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/0/0/0,0,2000,1518,400,300/0-0-0/745e9686-671e-4d25-82ee-8c3ad062dd3a/1/1/000336530006_2.jpg');"></div>
+                <div class="portfolio-item" style="background-image: url('https://format.creatorcdn.com/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/0/0/0,0,2500,1895,400,300/0-0-0/0de691f2-6d64-41e6-9115-4aa9ae97c430/1/1/armtree22.jpg');"></div>
+                <div class="portfolio-item" style="background-image: url('https://format.creatorcdn.com/778412b1-72b5-4bbd-bbd0-0b28e5a6ba7d/0/0/0/0,0,2500,1895,400,300/0-0-0/1c913eaa-d32c-47f8-87f9-243ca6452977/1/1/2019-08-25-0011.jpg');"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="services-inner">
+            <h2>Servicios Fotográficos</h2>
+            <div class="services-grid">
+                <div class="service">
+                    <div class="service-icon">📸</div>
+                    <h3>Sesión de Retrato</h3>
+                    <p>Sesiones personalizadas de 2 horas en estudio o localización. Incluye dirección artística, selección de 5 fotografías editadas y entrega digital en alta resolución.</p>
+                    <div class="price">Desde €350</div>
+                </div>
+                <div class="service">
+                    <div class="service-icon">🎓</div>
+                    <h3>Taller de Fotografía Analógica</h3>
+                    <p>Workshops de fotografía en película para todos los niveles. Desde introducción básica hasta masterclass de revelado. Materiales incluidos.</p>
+                    <div class="price">€45-80/persona</div>
+                </div>
+                <div class="service">
+                    <div class="service-icon">🎉</div>
+                    <h3>Cobertura de Eventos</h3>
+                    <p>Documentación fotográfica de eventos culturales, inauguraciones, celebraciones familiares y corporativos con enfoque artístico.</p>
+                    <div class="price">Consultar</div>
+                </div>
+                <div class="service">
+                    <div class="service-icon">🖼️</div>
+                    <h3>Impresiones Fine Art</h3>
+                    <p>Ediciones limitadas firmadas y numeradas. Impresión en papel Hahnemühle o lienzo, con certificado de autenticidad.</p>
+                    <div class="price">Desde €180</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="gallery-section">
+        <div class="gallery-inner">
+            <h2>Galería de Artistas Emergentes</h2>
+            <p>Marta Art Studio funciona como un espacio de representación para artistas emergentes de México y Latinoamérica, creando un puente cultural entre las vibrantes escenas artísticas del continente americano y el circuito europeo del arte contemporáneo.</p>
+            <p>Seleccionamos artistas cuyo trabajo dialoga con temas de identidad, migración, memoria colectiva y las tensiones entre tradición y contemporaneidad.</p>
+        </div>
+    </section>
+
+    <section class="artists">
+        <div class="artists-inner">
+            <h2>Artistas Representados</h2>
+            <p class="artists-subtitle">Una selección de talentos emergentes cuyas obras están disponibles a través de nuestra galería</p>
+            <div class="artists-grid">
+                <div class="artist">
+                    <div class="artist-image" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);"></div>
+                    <div class="artist-content">
+                        <h3>Artista 1</h3>
+                        <p class="country">Ciudad de México, México</p>
+                        <p>Trabajo en técnica mixta explorando la memoria urbana y los espacios abandonados de la megalópolis mexicana.</p>
+                    </div>
+                </div>
+                <div class="artist">
+                    <div class="artist-image" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);"></div>
+                    <div class="artist-content">
+                        <h3>Artista 2</h3>
+                        <p class="country">Buenos Aires, Argentina</p>
+                        <p>Serigrafías y grabados que reinterpretan iconografía popular latinoamericana con un enfoque feminista contemporáneo.</p>
+                    </div>
+                </div>
+                <div class="artist">
+                    <div class="artist-image" style="background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);"></div>
+                    <div class="artist-content">
+                        <h3>Artista 3</h3>
+                        <p class="country">Oaxaca, México</p>
+                        <p>Escultura en pequeño formato que fusiona técnicas tradicionales zapotecas con estética minimalista contemporánea.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="exhibitions">
+        <div class="exhibitions-inner">
+            <h2>Exposiciones</h2>
+            <div class="exhibition">
+                <div class="exhibition-date">
+                    <div class="month">Próximamente</div>
+                    <div class="year">2026</div>
+                </div>
+                <div class="exhibition-info">
+                    <h3>Convocatoria Abierta</h3>
+                    <p>Estamos buscando artistas emergentes latinoamericanos para nuestra próxima exposición colectiva en Barcelona. Si estás interesado en participar, envíanos tu portfolio.</p>
+                </div>
+            </div>
+            <div class="exhibition">
+                <div class="exhibition-date">
+                    <div class="month">Otoño</div>
+                    <div class="year">2025</div>
+                </div>
+                <div class="exhibition-info">
+                    <h3>Fronteras Porosas</h3>
+                    <p>Exposición colectiva que exploró los conceptos de migración, pertenencia y las fronteras físicas y simbólicas que atraviesan las identidades latinoamericanas.</p>
+                </div>
+            </div>
+            <div class="exhibition">
+                <div class="exhibition-date">
+                    <div class="month">Primavera</div>
+                    <div class="year">2025</div>
+                </div>
+                <div class="exhibition-info">
+                    <h3>Raíces Nómadas</h3>
+                    <p>Primera exposición de la galería, presentando obra de tres artistas mexicanos radicados en Europa, reflexionando sobre el desarraigo y la construcción de nuevas identidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="collector-services">
+        <div class="collector-services-inner">
+            <h2>Servicios para Coleccionistas</h2>
+            <div class="collector-grid">
+                <div class="collector-service">
+                    <div class="collector-service-icon">🎨</div>
+                    <h3>Asesoría de Arte</h3>
+                    <p>Te ayudamos a descubrir artistas emergentes y a construir una colección que refleje tus intereses y valores.</p>
+                </div>
+                <div class="collector-service">
+                    <div class="collector-service-icon">🏠</div>
+                    <h3>Art at Home</h3>
+                    <p>Visitas privadas a tu espacio para asesorarte sobre qué obras complementarían tu colección o decoración.</p>
+                </div>
+                <div class="collector-service">
+                    <div class="collector-service-icon">🍷</div>
+                    <h3>Vernissages Privados</h3>
+                    <p>Acceso exclusivo a inauguraciones y encuentros con artistas antes de las aperturas públicas.</p>
+                </div>
+                <div class="collector-service">
+                    <div class="collector-service-icon">📦</div>
+                    <h3>Encargos Especiales</h3>
+                    <p>Facilitamos obras por encargo directamente con los artistas que representamos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>¿Interesado en nuestro trabajo?</h2>
+        <p>Explora el portfolio completo, adquiere obra original o envía tu portfolio si eres artista</p>
+        <div class="cta-buttons">
+            <a href="../portfolio/" class="cta-btn">Portfolio Marta</a>
+            <a href="../tienda/" class="cta-btn secondary">Comprar Obra</a>
+            <a href="mailto:galeria@martaartstudio.com" class="cta-btn gallery">Enviar Portfolio</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>Marta Art Studio | Fotografía & Galería | Barcelona</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="https://www.instagram.com/martasmaldone/" target="_blank">@martasmaldone</a> |
+            <a href="../portfolio/">Portfolio</a>
+        </p>
+    </footer>
+</body>
+</html>

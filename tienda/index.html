@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda | Marta Art Studio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+        }
+        nav {
+            background: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+        nav a:hover { opacity: 1; }
+        .cart-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #27ae60 0%, #1e8449 100%);
+            color: white;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+        }
+        .hero p {
+            opacity: 0.9;
+        }
+        .filters {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .filter-btn {
+            padding: 0.5rem 1.2rem;
+            border: 2px solid #27ae60;
+            background: white;
+            color: #27ae60;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #27ae60;
+            color: white;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .product {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        .product-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+        .product-image.foto { background-color: #667eea; }
+        .product-image.arte { background-color: #f093fb; }
+        .product-image.textil { background-color: #4facfe; }
+        .product-image.ceramica { background-color: #fa709a; }
+        .product-image.libro { background-color: #a8edea; }
+        .product-image.alebrije { background-color: #ff9a9e; }
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        .badge.new { background: #27ae60; }
+        .badge.limited { background: #9b59b6; }
+        .product-info {
+            padding: 1.5rem;
+        }
+        .product-category {
+            font-size: 0.75rem;
+            color: #27ae60;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        .product-title {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        .product-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .price small {
+            font-size: 0.8rem;
+            color: #888;
+            font-weight: normal;
+        }
+        .add-cart {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        .add-cart:hover {
+            background: #1e8449;
+        }
+        .instagram-cta {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            margin: 2rem;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: 2rem auto;
+        }
+        .instagram-cta h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        .instagram-cta p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        .instagram-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+        .instagram-link:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            font-size: 0.9rem;
+            background: #2c3e50;
+            color: rgba(255,255,255,0.7);
+        }
+        footer a {
+            color: rgba(255,255,255,0.9);
+        }
+        .section-title {
+            text-align: center;
+            padding: 2rem;
+            color: #2c3e50;
+        }
+        .section-title h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+        .section-title p {
+            color: #666;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal {
+            background: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem;
+            text-align: center;
+        }
+        .modal h3 {
+            color: #27ae60;
+            margin-bottom: 1rem;
+        }
+        .modal p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        .modal-close {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../">← Marta Ventures</a>
+        <div class="nav-links" style="display: flex; gap: 1.5rem; align-items: center;">
+            <a href="../arte/">Arte</a>
+            <a href="../fotografia/">Foto & Galería</a>
+            <a href="../lab/">Lab</a>
+            <span class="cart-icon" onclick="showCart()" style="cursor: pointer;">🛒</span>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Tienda Online</h1>
+        <p>Arte Mexicano, Fotografía Original y Galería de Artistas Emergentes</p>
+    </header>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+        <button class="filter-btn" onclick="filterProducts('arte')">Commercio</button>
+        <button class="filter-btn" onclick="filterProducts('artistico')">Artistico</button>
+        <button class="filter-btn" onclick="filterProducts('lab')">Professionale</button>
+    </div>
+
+    <div class="section-title">
+        <h2>Colección Destacada</h2>
+        <p>Piezas únicas seleccionadas por Marta</p>
+    </div>
+
+    <main class="products">
+        <!-- Photography - Marta Smaldone originals -->
+        <div class="product" data-category="artistico">
+            <div class="product-image foto" style="background-image: url('../portfolio/images/works/la-memoria-si-fa-carne/01.jpg');">
+                <span class="badge limited">Edición Limitada</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Fotografía Original</div>
+                <h3 class="product-title">La Memoria si fa Carne I</h3>
+                <p class="product-desc">Impresión fine art en papel Hahnemühle. Edición de 25 piezas firmadas y numeradas.</p>
+                <div class="product-footer">
+                    <span class="price">€280 <small>40x60cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Retrato Artístico')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image foto" style="background-image: url('../portfolio/images/works/le-plat-pays/01-belgi.jpg');">
+                <span class="badge new">Nuevo</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Fotografía Original</div>
+                <h3 class="product-title">Le Plat Pays I</h3>
+                <p class="product-desc">Fotografía analógica. Impresión giclée sobre lienzo, lista para colgar.</p>
+                <div class="product-footer">
+                    <span class="price">€220 <small>50x70cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Serie Analógica I')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image foto" style="background-image: url('../portfolio/images/works/le-plat-pays/03-bxl01.jpg');">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Fotografía Original</div>
+                <h3 class="product-title">Le Plat Pays II</h3>
+                <p class="product-desc">De la serie "Le plat pays qui est un peu le mien". Impresión fine art.</p>
+                <div class="product-footer">
+                    <span class="price">€195 <small>60x40cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Paisaje Mediterráneo')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image foto" style="background-image: url('../portfolio/images/works/la-memoria-si-fa-carne/02.jpg');">
+                <span class="badge limited">Única</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Fotografía Original</div>
+                <h3 class="product-title">La Memoria si fa Carne II</h3>
+                <p class="product-desc">Captura en película. Edición limitada firmada por la artista.</p>
+                <div class="product-footer">
+                    <span class="price">€240 <small>50x40cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Serie Analógica II')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image foto" style="background-image: url('../portfolio/images/works/il-dottore-della-peste/01.jpg');">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Fotografía Original</div>
+                <h3 class="product-title">Il Dottore della Peste</h3>
+                <p class="product-desc">De la serie conceptual homónima. Impresión de archivo en papel algodón.</p>
+                <div class="product-footer">
+                    <span class="price">€320 <small>70x50cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Il Dottore della Peste')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image foto" style="background-image: url('../portfolio/images/works/the-circle-is-not-round/01.jpg');">
+                <span class="badge new">Nuevo</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Fotografía Original</div>
+                <h3 class="product-title">The Circle is Not Round I</h3>
+                <p class="product-desc">De la serie sobre naturaleza y geometría. Impresión fine art.</p>
+                <div class="product-footer">
+                    <span class="price">€260 <small>60x45cm</small></span>
+                    <button class="add-cart" onclick="addToCart('The Circle is Not Round')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prints & Postcards -->
+        <div class="product" data-category="artistico">
+            <div class="product-image foto" style="background-image: url('../portfolio/images/overview-1.jpg'); background-position: center;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Prints</div>
+                <h3 class="product-title">Postales de Arte</h3>
+                <p class="product-desc">Colección de 12 postales con fotografías originales de todas las series.</p>
+                <div class="product-footer">
+                    <span class="price">€24 <small>Set 12</small></span>
+                    <button class="add-cart" onclick="addToCart('Postales de Arte')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image foto" style="background-image: url('../portfolio/images/works/le-plat-pays/05-21.jpg');">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Fotografía Original</div>
+                <h3 class="product-title">Le Plat Pays III</h3>
+                <p class="product-desc">Trabajo documental en formato medio. Edición numerada.</p>
+                <div class="product-footer">
+                    <span class="price">€185 <small>40x30cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Serie 2019')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTE MEXICANO -->
+        <div class="product" data-category="arte">
+            <div class="product-image alebrije" style="background-image: url('https://images.unsplash.com/photo-1596436889106-be35e843f974?w=600&h=400&fit=crop'); background-size: cover;">
+                <span class="badge">Popular</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Alebrije</div>
+                <h3 class="product-title">Dragón Oaxaqueño</h3>
+                <p class="product-desc">Tallado a mano en madera de copal por artesanos de San Martín Tilcajete, Oaxaca.</p>
+                <div class="product-footer">
+                    <span class="price">€95 <small>15cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Dragón Oaxaqueño')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="arte">
+            <div class="product-image alebrije" style="background-image: url('https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=600&h=400&fit=crop'); background-size: cover;">
+                <span class="badge new">Nuevo</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Alebrije</div>
+                <h3 class="product-title">Jaguar Fantástico</h3>
+                <p class="product-desc">Pieza única pintada con motivos tradicionales zapotecos. Certificado de autenticidad.</p>
+                <div class="product-footer">
+                    <span class="price">€145 <small>20cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Jaguar Fantástico')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="arte">
+            <div class="product-image ceramica" style="background-image: url('https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=600&h=400&fit=crop'); background-size: cover;">
+                <span class="badge limited">Única</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Cerámica Talavera</div>
+                <h3 class="product-title">Jarrón Puebla Clásico</h3>
+                <p class="product-desc">Auténtica Talavera de Puebla. Certificado de origen incluido.</p>
+                <div class="product-footer">
+                    <span class="price">€175 <small>25cm altura</small></span>
+                    <button class="add-cart" onclick="addToCart('Jarrón Puebla')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="arte">
+            <div class="product-image ceramica" style="background-image: url('https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Cerámica Talavera</div>
+                <h3 class="product-title">Set Platos Decorativos</h3>
+                <p class="product-desc">Conjunto de 4 platos de pared con diseños florales tradicionales de Puebla.</p>
+                <div class="product-footer">
+                    <span class="price">€120 <small>Set 4 piezas</small></span>
+                    <button class="add-cart" onclick="addToCart('Set Platos')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="arte">
+            <div class="product-image textil" style="background-image: url('https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=600&h=400&fit=crop'); background-size: cover;">
+                <span class="badge new">Nuevo</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Textil</div>
+                <h3 class="product-title">Rebozo de Tenancingo</h3>
+                <p class="product-desc">Tejido en telar de cintura, 100% algodón orgánico con tintes naturales.</p>
+                <div class="product-footer">
+                    <span class="price">€185 <small>200x70cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Rebozo')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="arte">
+            <div class="product-image textil" style="background-image: url('https://images.unsplash.com/photo-1615529328331-f8917597711f?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Textil</div>
+                <h3 class="product-title">Cojines Bordados Chiapas</h3>
+                <p class="product-desc">Par de cojines con bordado Zinacantán hecho a mano. Incluye relleno.</p>
+                <div class="product-footer">
+                    <span class="price">€89 <small>Par 45x45cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Cojines Chiapas')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="arte">
+            <div class="product-image arte" style="background-image: url('https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Arte Popular</div>
+                <h3 class="product-title">Catrina Decorativa</h3>
+                <p class="product-desc">Figura de barro policromado de Capula, Michoacán. Pieza única de colección.</p>
+                <div class="product-footer">
+                    <span class="price">€110 <small>30cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Catrina')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- GALERÍA - Artistas Emergentes -->
+        <div class="product" data-category="artistico">
+            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&h=400&fit=crop'); background-size: cover;">
+                <span class="badge limited">Edición Limitada</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Galería</div>
+                <h3 class="product-title">Obra Gráfica Contemporánea</h3>
+                <p class="product-desc">Serigrafía de artista emergente latinoamericano. Edición de 50, firmada.</p>
+                <div class="product-footer">
+                    <span class="price">€320 <small>50x70cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Obra Gráfica')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Galería</div>
+                <h3 class="product-title">Pintura Acrílica Original</h3>
+                <p class="product-desc">Obra original de artista mexicano emergente. Incluye certificado de autenticidad.</p>
+                <div class="product-footer">
+                    <span class="price">€850 <small>80x60cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Pintura Original')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=600&h=400&fit=crop'); background-size: cover;">
+                <span class="badge new">Nuevo</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Galería</div>
+                <h3 class="product-title">Escultura Pequeño Formato</h3>
+                <p class="product-desc">Pieza escultórica de artista emergente. Bronce patinado, base incluida.</p>
+                <div class="product-footer">
+                    <span class="price">€480 <small>25cm</small></span>
+                    <button class="add-cart" onclick="addToCart('Escultura')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Galería</div>
+                <h3 class="product-title">Colección Print Artists</h3>
+                <p class="product-desc">Set de 3 prints de diferentes artistas emergentes de nuestra galería.</p>
+                <div class="product-footer">
+                    <span class="price">€95 <small>Set 3 A4</small></span>
+                    <button class="add-cart" onclick="addToCart('Print Artists')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Art Books -->
+        <div class="product" data-category="artistico">
+            <div class="product-image libro" style="background-image: linear-gradient(rgba(168,237,234,0.8), rgba(254,214,227,0.8)), url('../portfolio/images/overview-2.jpg');">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Libro de Arte</div>
+                <h3 class="product-title">Works 2019-2024</h3>
+                <p class="product-desc">Catálogo de Marta Smaldone. Edición limitada 100 ejemplares.</p>
+                <div class="product-footer">
+                    <span class="price">€85</span>
+                    <button class="add-cart" onclick="addToCart('Works 2019-2024')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experiences -->
+        <div class="product" data-category="artistico">
+            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Experiencia</div>
+                <h3 class="product-title">Sesión de Retrato</h3>
+                <p class="product-desc">Sesión fotográfica de 2 horas con Marta. Incluye 5 fotos editadas.</p>
+                <div class="product-footer">
+                    <span class="price">€350</span>
+                    <button class="add-cart" onclick="addToCart('Sesión de Retrato')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Experiencia</div>
+                <h3 class="product-title">Taller de Fotografía</h3>
+                <p class="product-desc">Workshop de fotografía analógica. 4 horas con materiales incluidos.</p>
+                <div class="product-footer">
+                    <span class="price">€120 <small>por persona</small></span>
+                    <button class="add-cart" onclick="addToCart('Taller de Fotografía')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="artistico">
+            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1577720643272-265f09367456?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Experiencia Galería</div>
+                <h3 class="product-title">Visita Guiada + Vernissage</h3>
+                <p class="product-desc">Acceso VIP a próxima inauguración con visita guiada por la curadora.</p>
+                <div class="product-footer">
+                    <span class="price">€45 <small>por persona</small></span>
+                    <button class="add-cart" onclick="addToCart('Visita Vernissage')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MINI-LAB SERVICES -->
+        <div class="product" data-category="lab">
+            <div class="product-image" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); background-image: url('https://images.unsplash.com/photo-1495121553079-4c61bcce1894?w=600&h=400&fit=crop'); background-size: cover; background-blend-mode: overlay;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Mini-Lab</div>
+                <h3 class="product-title">Revelado B/N</h3>
+                <p class="product-desc">Revelado profesional de película blanco y negro. 35mm y formato medio. Push/pull disponible.</p>
+                <div class="product-footer">
+                    <span class="price">€8 <small>/rollo</small></span>
+                    <button class="add-cart" onclick="addToCart('Revelado B/N')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="lab">
+            <div class="product-image" style="background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%); background-image: url('https://images.unsplash.com/photo-1609010697446-11f2155278f0?w=600&h=400&fit=crop'); background-size: cover; background-blend-mode: overlay;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Mini-Lab</div>
+                <h3 class="product-title">Revelado Color C-41</h3>
+                <p class="product-desc">Revelado de película color negativo. Control preciso de temperatura y tiempos.</p>
+                <div class="product-footer">
+                    <span class="price">€10 <small>/rollo</small></span>
+                    <button class="add-cart" onclick="addToCart('Revelado Color C-41')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="lab">
+            <div class="product-image" style="background: linear-gradient(135deg, #2980b9 0%, #3498db 100%); background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=400&fit=crop'); background-size: cover; background-blend-mode: overlay;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Mini-Lab</div>
+                <h3 class="product-title">Escaneo Alta Resolución</h3>
+                <p class="product-desc">Escaneo profesional a 4800dpi. Corrección de color básica incluida. TIFF sin comprimir.</p>
+                <div class="product-footer">
+                    <span class="price">€0.50 <small>/foto</small></span>
+                    <button class="add-cart" onclick="addToCart('Escaneo Alta Resolución')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="lab">
+            <div class="product-image" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%); background-image: url('https://images.unsplash.com/photo-1572947650440-e8a97ef053b2?w=600&h=400&fit=crop'); background-size: cover; background-blend-mode: overlay;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Mini-Lab</div>
+                <h3 class="product-title">Edición y Retoque</h3>
+                <p class="product-desc">Corrección de color avanzada, eliminación de polvo y arañazos, ajustes de exposición.</p>
+                <div class="product-footer">
+                    <span class="price">€3 <small>/foto</small></span>
+                    <button class="add-cart" onclick="addToCart('Edición y Retoque')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="lab">
+            <div class="product-image" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%); background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop'); background-size: cover; background-blend-mode: overlay;">
+                <span class="badge">Popular</span>
+            </div>
+            <div class="product-info">
+                <div class="product-category">Mini-Lab</div>
+                <h3 class="product-title">Pack Completo</h3>
+                <p class="product-desc">Revelado + escaneo de rollo completo (36 fotos) + edición básica. La opción más popular.</p>
+                <div class="product-footer">
+                    <span class="price">€25 <small>/rollo</small></span>
+                    <button class="add-cart" onclick="addToCart('Pack Completo')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="product" data-category="lab">
+            <div class="product-image" style="background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%); background-image: url('https://images.unsplash.com/photo-1606567595334-d39972c85dfd?w=600&h=400&fit=crop'); background-size: cover; background-blend-mode: overlay;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Mini-Lab</div>
+                <h3 class="product-title">Servicio Express</h3>
+                <p class="product-desc">Entrega en 24h para cualquier servicio de revelado o escaneo. Recargo adicional.</p>
+                <div class="product-footer">
+                    <span class="price">+50% <small>recargo</small></span>
+                    <button class="add-cart" onclick="addToCart('Servicio Express')">Añadir</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gift Card -->
+        <div class="product" data-category="artistico">
+            <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=600&h=400&fit=crop'); background-size: cover;">
+            </div>
+            <div class="product-info">
+                <div class="product-category">Tarjeta Regalo</div>
+                <h3 class="product-title">Gift Card</h3>
+                <p class="product-desc">Tarjeta regalo canjeable por cualquier producto o servicio del estudio.</p>
+                <div class="product-footer">
+                    <span class="price">Desde €50</span>
+                    <button class="add-cart" onclick="addToCart('Gift Card')">Añadir</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="instagram-cta">
+        <h3>Síguenos en Instagram</h3>
+        <p>Descubre las últimas piezas, el proceso creativo y novedades exclusivas</p>
+        <a href="https://www.instagram.com/martasmaldone/" target="_blank" class="instagram-link">
+            📷 @martasmaldone
+        </a>
+    </div>
+
+    <footer>
+        <p>Marta Art Studio | Barcelona, España</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">
+            Envíos a toda Europa | Contacto: <a href="mailto:info@martaartstudio.com">info@martaartstudio.com</a>
+        </p>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cartModal">
+        <div class="modal">
+            <h3>Carrito de Compras</h3>
+            <p id="cartMessage">Tu carrito está vacío</p>
+            <button class="modal-close" onclick="closeCart()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function filterProducts(category) {
+            const products = document.querySelectorAll('.product');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            products.forEach(product => {
+                if (category === 'all' || product.dataset.category === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function addToCart(productName) {
+            cart.push(productName);
+            alert('✓ ' + productName + ' añadido al carrito');
+        }
+
+        function showCart() {
+            const modal = document.getElementById('cartModal');
+            const message = document.getElementById('cartMessage');
+
+            if (cart.length === 0) {
+                message.textContent = 'Tu carrito está vacío';
+            } else {
+                message.innerHTML = '<strong>Productos:</strong><br>' + cart.join('<br>') +
+                    '<br><br><em>Para finalizar tu compra, contáctanos por email.</em>';
+            }
+            modal.style.display = 'flex';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

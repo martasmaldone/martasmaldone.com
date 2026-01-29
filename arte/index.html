@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte Mexicano | Marta Art Studio</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            min-height: 100vh;
+        }
+        nav {
+            background: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a { color: white; text-decoration: none; opacity: 0.8; }
+        nav a:hover { opacity: 1; }
+        .nav-links { display: flex; gap: 2rem; }
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?w=1200&q=80') center/cover;
+            opacity: 0.2;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+        .hero p { font-size: 1.2rem; opacity: 0.9; }
+        .about {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .about h2 {
+            color: #c0392b;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .about p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin: 3rem 0;
+            align-items: center;
+        }
+        .about-image {
+            height: 300px;
+            border-radius: 12px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .categories {
+            background: white;
+            padding: 4rem 2rem;
+        }
+        .categories-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .categories h2 {
+            text-align: center;
+            color: #c0392b;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .category {
+            background: #f9f9f9;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        .category:hover { transform: translateY(-5px); }
+        .category-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        .category-content { padding: 1.5rem; }
+        .category h3 { color: #c0392b; margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .category p { color: #666; line-height: 1.6; font-size: 0.95rem; }
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+        }
+        .cta h2 { font-weight: 300; margin-bottom: 1rem; }
+        .cta p { opacity: 0.8; margin-bottom: 2rem; }
+        .cta-btn {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover { background: #c0392b; }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #1a252f;
+            color: rgba(255,255,255,0.6);
+        }
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../">← Marta Ventures</a>
+        <div class="nav-links">
+            <a href="../fotografia/">Foto & Galería</a>
+            <a href="../lab/">Lab</a>
+            <a href="../tienda/">Tienda</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>ARTE MEXICANO</h1>
+            <p>Artesanía tradicional y diseño contemporáneo de México</p>
+        </div>
+    </header>
+
+    <section class="about">
+        <h2>Nuestra Historia</h2>
+        <p>En Marta Art Studio traemos a Barcelona lo mejor del arte popular mexicano. Cada pieza que ofrecemos ha sido seleccionada personalmente en talleres artesanales de Oaxaca, Puebla, Chiapas, Michoacán y otras regiones de México, estableciendo relaciones directas con los maestros artesanos y sus comunidades.</p>
+
+        <div class="about-grid">
+            <div class="about-image" style="background-image: url('https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=600&q=80');"></div>
+            <div>
+                <h2>Comercio Justo</h2>
+                <p>Trabajamos bajo principios de comercio justo, asegurando que los artesanos reciban una compensación justa por su trabajo. Cada compra apoya directamente a familias y comunidades artesanales que mantienen vivas tradiciones ancestrales.</p>
+                <p>Nuestro compromiso es preservar y difundir el patrimonio cultural mexicano en Europa, conectando a los amantes del arte con piezas auténticas que cuentan historias de generaciones.</p>
+            </div>
+        </div>
+
+        <div class="about-grid">
+            <div>
+                <h2>Autenticidad Garantizada</h2>
+                <p>Cada pieza viene con certificado de autenticidad y origen. Trabajamos exclusivamente con artesanos registrados y talleres reconocidos por FONART (Fondo Nacional para el Fomento de las Artesanías) y las secretarías de cultura estatales.</p>
+                <p>Desde los coloridos alebrijes de San Martín Tilcajete hasta la cerámica Talavera de Puebla, cada objeto es una obra de arte única e irrepetible.</p>
+            </div>
+            <div class="about-image" style="background-image: url('https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=600&q=80');"></div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="categories-inner">
+            <h2>Nuestras Colecciones</h2>
+            <div class="categories-grid">
+                <div class="category">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1596436889106-be35e843f974?w=500&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Alebrijes de Oaxaca</h3>
+                        <p>Criaturas fantásticas talladas en madera de copal y pintadas a mano con pigmentos naturales. Cada alebrije es una pieza única creada por maestros artesanos de San Martín Tilcajete y San Antonio Arrazola.</p>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=500&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Cerámica Talavera</h3>
+                        <p>Auténtica Talavera de Puebla, patrimonio cultural de la humanidad por la UNESCO. Jarrones, platos, azulejos y piezas decorativas elaboradas con técnicas del siglo XVI.</p>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1559662780-c3bab6f7e00b?w=500&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Textiles Artesanales</h3>
+                        <p>Rebozos, huipiles, manteles y cojines bordados a mano. Técnicas ancestrales de Chiapas, Oaxaca y el Estado de México con tintes naturales y diseños tradicionales.</p>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=500&q=80');"></div>
+                    <div class="category-content">
+                        <h3>Arte Popular</h3>
+                        <p>Catrinas de Capula, Árboles de la Vida de Metepec, barro negro de Oaxaca, lacas de Olinalá y más tesoros del arte popular mexicano.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Descubre Nuestra Colección</h2>
+        <p>Visita nuestra tienda online y encuentra la pieza perfecta para tu hogar</p>
+        <a href="../tienda/" class="cta-btn">Ver Tienda</a>
+    </section>
+
+    <footer>
+        <p>Marta Art Studio | Barcelona, España</p>
+        <p style="margin-top: 0.5rem;">Arte mexicano auténtico en el corazón de Europa</p>
+    </footer>
+</body>
+</html>
